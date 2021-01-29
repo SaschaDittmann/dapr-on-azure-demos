@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buyer
+  labels:
+    app: buyer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: buyer
+  template:
+    metadata:
+      labels:
+        app: buyer
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "buyer"
+    spec:
+      containers:
+      - name: python
+        image: <myacr>.azurecr.io/buyer:latest

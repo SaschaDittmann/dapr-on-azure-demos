@@ -1,0 +1,42 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: shop
+  labels:
+    app: shop
+spec:
+  selector:
+    app: shop
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop
+  labels:
+    app: shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shop
+  template:
+    metadata:
+      labels:
+        app: shop
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "shop"
+        dapr.io/app-port: "3000"
+    spec:
+      containers:
+      - name: node
+        image: <myacr>.azurecr.io/shop:latest
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: Always
