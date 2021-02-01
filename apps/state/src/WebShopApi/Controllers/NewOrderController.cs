@@ -28,7 +28,7 @@ namespace WebShopApi.Controllers
             _logger.LogInformation($"Got a new order! Order ID: {order.OrderId}");
 
             var stateResult = await _stateService.SetAsync("order", order);
-            if (stateResult != HttpStatusCode.OK)
+            if (stateResult != HttpStatusCode.OK && stateResult != HttpStatusCode.Created)
             {
                 _logger.LogError("Failed to persist state.");
                 return StatusCode((int)stateResult);

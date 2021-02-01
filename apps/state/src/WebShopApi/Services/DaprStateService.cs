@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -36,14 +37,17 @@ namespace WebShopApi.Services
 
         public async Task<HttpStatusCode> SetAsync(string key, object value)
         {
-            var state = new DaprState
+            return await SetAsync(new List<KeyValuePair<string, object>>
             {
-                Key = key,
-                Value = JsonConvert.SerializeObject(value)
-            };
+                new KeyValuePair<string, object>(key, value)
+            });
+        }
+
+        public async Task<HttpStatusCode> SetAsync(IEnumerable<KeyValuePair<string, object>> states)
+        {
             var response = await _httpClient.PostAsync(
                 _stateStoreUri, 
-                JsonContent.Create(state)
+                JsonContent.Create(states)
                 );
             return response.StatusCode;
         }
