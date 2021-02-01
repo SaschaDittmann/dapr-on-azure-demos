@@ -70,5 +70,9 @@ if [ $? != 0 ]; then
 	echo "Using existing resource group..."
 fi
 
+cd src/WebShopApi
+dotnet publish -c Release
+cd ../..
+az acr build -t $acrServer/shop:latest -r $acrName ./src/WebShopApi
+
 az acr build -t $acrServer/buyer:latest -r $acrName ./src/buyer
-az acr build -t $acrServer/shop:latest -r $acrName ./src/shop

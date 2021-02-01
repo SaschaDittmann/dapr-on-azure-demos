@@ -10,7 +10,7 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 3000
+    targetPort: 80
   type: LoadBalancer
 
 ---
@@ -32,11 +32,11 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "shop"
-        dapr.io/app-port: "3000"
+        dapr.io/app-port: "80"
     spec:
       containers:
-      - name: node
+      - name: dotnet
         image: <myacr>.azurecr.io/shop:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         imagePullPolicy: Always
