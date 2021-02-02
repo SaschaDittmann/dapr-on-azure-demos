@@ -13,7 +13,7 @@ spec:
   - name: masterKey
     secretKeyRef:
       name: azure-cosmosdb
-      key: key
+      key: masterKey
   - name: database
     value: statestore
   - name: collection
