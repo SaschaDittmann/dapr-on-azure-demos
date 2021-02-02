@@ -18,3 +18,5 @@ spec:
     value: statestore
   - name: collection
     value: states
+  - name: actorStateStore
+    value: "true"

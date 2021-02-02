@@ -112,7 +112,7 @@ else
 	cosmosdbAccountResult=$(az cosmosdb create -n "$cosmosdbAccountName" -g "$resourceGroupName" --locations regionName=$resourceGroupLocation failoverPriority=0 isZoneRedundant=False)
 	if [ $? != 0 ];
 	then
-		echo "Creating the Azure Storage Account failed. Aborting..."
+		echo "Creating the Azure Cosmos DB Account failed. Aborting..."
 		exit 1
 	fi
 	echo $cosmosdbAccountResult | tee logs/cosmosdb.json > /dev/null
