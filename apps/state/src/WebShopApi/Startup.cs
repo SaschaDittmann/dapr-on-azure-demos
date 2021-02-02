@@ -1,15 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using WebShopApi.Services;
 
@@ -29,8 +24,8 @@ namespace WebShopApi
         {
             var daprHttpPortEnv = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT");
             var daprGrpcPortEnv = Environment.GetEnvironmentVariable("DAPR_GRPC_PORT");
-            Console.WriteLine($"DAPR_HTTP_PORT: {daprHttpPortEnv}");
-            Console.WriteLine($"DAPR_GRPC_PORT: {daprGrpcPortEnv}");
+            Debug.WriteLine($"DAPR_HTTP_PORT: {daprHttpPortEnv}");
+            Debug.WriteLine($"DAPR_GRPC_PORT: {daprGrpcPortEnv}");
             
             var daprStateService = new DaprStateService(
                 string.IsNullOrEmpty(daprHttpPortEnv) ? 3500 : Convert.ToInt32(daprHttpPortEnv),
