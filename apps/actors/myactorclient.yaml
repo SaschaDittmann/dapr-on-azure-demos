@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-actor-client
+  labels:
+    app: my-actor-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-actor-client
+  template:
+    metadata:
+      labels:
+        app: my-actor-client
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "my-actor-client"
+    spec:
+      containers:
+      - name: actorclient
+        image: <myacr>.azurecr.io/myactorclient:latest
