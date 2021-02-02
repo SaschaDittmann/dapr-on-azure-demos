@@ -16,7 +16,7 @@ namespace WebShopApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
             var daprHttpPortEnv = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT");
             var daprGrpcPortEnv = Environment.GetEnvironmentVariable("DAPR_GRPC_PORT");

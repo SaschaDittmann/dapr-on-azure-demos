@@ -27,7 +27,7 @@ namespace WebShopApi.Controllers
             var stateResult = await _stateService.GetAsync<Order>("order");
             if (stateResult.StatusCode != HttpStatusCode.OK)
             {
-                _logger.LogError("Could not get state.");
+                _logger.LogError($"Could not get state ({stateResult.ReasonPhrase}).\nReason: {stateResult.ErrorMessage}");
                 return Enumerable.Empty<Order>();
             }
             return new[] {stateResult.Value};

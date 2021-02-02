@@ -6,8 +6,8 @@ namespace WebShopApi.Services
 {
     public interface IDaprStateService
     {
-        Task<DaprStateResult<T>> GetAsync<T>(string key);
-        Task<HttpStatusCode> SetAsync(string key, object value);
-        Task<HttpStatusCode> SetAsync(IEnumerable<KeyValuePair<string, object>> states);
+        Task<DaprStateGetResult<T>> GetAsync<T>(string key);
+        Task<DaprStateSetResult> SetAsync(string key, object value);
+        Task<DaprStateSetResult> SetAsync(IEnumerable<KeyValuePair<string, object>> states);
     }
 }
