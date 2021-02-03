@@ -1,42 +1,42 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: shop
+  name: my-actor-service
   labels:
-    app: shop
+    app: my-actor-service
 spec:
   selector:
-    app: shop
+    app: my-actor-service
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 80
+    targetPort: 5000
   type: LoadBalancer
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shop
+  name: my-actor-service
   labels:
-    app: shop
+    app: my-actor-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: shop
+      app: my-actor-service
   template:
     metadata:
       labels:
-        app: shop
+        app: my-actor-service
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "shop"
+        dapr.io/app-id: "my-actor-service"
         dapr.io/app-port: "80"
     spec:
       containers:
-      - name: dotnet
-        image: <myacr>.azurecr.io/shop:latest
+      - name: actor
+        image: <myacr>.azurecr.io/myactorservice:latest
         ports:
         - containerPort: 80
         imagePullPolicy: Always
